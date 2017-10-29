@@ -52,6 +52,7 @@ const handlers = {
         this.emit(':responseReady');
     },
     'TravelTimeIntent': function () {
+        var self = this;
         var origin = this.event.request.intent.slots.ORIGIN.value;
         var dest = this.event.request.intent.slots.DESTINATION.value;
         var avoid = this.event.request.intent.slots.AVOID.value;
@@ -60,9 +61,9 @@ const handlers = {
         var speechOutput = 'I don\' t quite get it. Unfamiliar places may be.';
         var reprompt = 'Try saying something like this; how much time will it take from Mill City Museum, Minnesota to East Village Apartments, Minnesota';
 
-        var originEncoded = origin.replace(/ /g, '+');
+
+        var timeStamp = new Date().getTime();        var originEncoded = origin.replace(/ /g, '+');
         var destEncoded = dest.replace(/ /g, '+');
-        var timeStamp = new Date().getTime();
 
         if (!origin) {
             speechOutput = 'I did not catch the origin.';
@@ -94,16 +95,16 @@ const handlers = {
                         var avgTime = response.routes[0].legs[0].duration.text;
                         var distance = response.routes[0].legs[0].distance.text;
                         speechOutput = 'Considering the traffic, it should take you ' + trafficTime + '; The average time is about ' + avgTime + ' to cover this distance of ' + distance + '; Good luck';
-                        this.response.speak(speechOutput);
-                        this.emit(':responseReady');
+                        self.response.speak(speechOutput);
+                        self.emit(':responseReady');
                     }   
                     else {
-                        this.response.speak(speechOutput).reprompt('Try again.');
-                        this.emit(':responseReady');
+                        self.response.speak(speechOutput).listen('Try again.');
+                        self.emit(':responseReady');
                     }
                 }).catch(() => {
-                    this.response.speak(speechOutput).reprompt('Try again.');
-                    this.emit(':responseReady');
+                    self.response.speak(speechOutput).listen('Try again.');
+                    self.emit(':responseReady');
                 });
 
         }
