@@ -1,0 +1,11 @@
+{
+    "name": "travel-time",
+    "version": "0.1.0",
+    "description": "A travel time skill",
+    "main": "index.js",
+    "dependencies": {
+        "alexa-sdk": "^1.0.15"
+    },
+    "author": "Rajesh Panda",
+    "license": "MIT"
+}
