@@ -6,7 +6,7 @@ var http = require('https');
 
 exports.handler = function (event, context, callback) {
     var alexa = Alexa.handler(event, context, callback);
-    alexa.appId = 'amzn1.ask.skill.044fedca-90a4-4949-bc62-994c5618ce61';
+    alexa.appId = '#ALEXA_APP_ID';
     alexa.registerHandlers(handlers);
     alexa.execute();
 };
@@ -56,7 +56,7 @@ const handlers = {
         var origin = this.event.request.intent.slots.ORIGIN.value;
         var dest = this.event.request.intent.slots.DESTINATION.value;
         var avoid = this.event.request.intent.slots.AVOID.value;
-        var g_str = 'https://maps.googleapis.com/maps/api/directions/json?origin=STARTINGPT&destination=ENDINGPT&departure_time=TIMESTAMP&traffic_model=best_guess&key=AIzaSyBhuXgnwJSbVPVfZZL8kawgcH04COIQHmk';
+        var g_str = 'https://maps.googleapis.com/maps/api/directions/json?origin=STARTINGPT&destination=ENDINGPT&departure_time=TIMESTAMP&traffic_model=best_guess&key=API_KEY';
 
         var speechOutput = 'I don\' t quite get it. Unfamiliar places may be.';
         var reprompt = 'Try saying something like this; how much time will it take from Mill City Museum, Minnesota to East Village Apartments, Minnesota';
